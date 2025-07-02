@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para o amor da minha vida ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    .container {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #ff69b4;
+      text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .contador {
+      font-size: 1.3rem;
+      margin: 20px 0;
+      color: #ffb6c1;
+      background: rgba(255, 182, 193, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ff69b4;
+    }
+
+    .contador span {
+      font-weight: bold;
+      color: #ff69b4;
+      font-size: 1.4rem;
+    }
+
+    img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      border: 3px solid #ff69b4;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+      transition: transform 0.5s;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+
+    img:hover {
+      transform: scale(1.03);
+    }
+
+    .mensagem-final {
+      font-size: 1.2rem;
+      margin: 20px 0;
+      color: #ffb6c1;
+      min-height: 60px;
+    }
+
+    .jogo-container {
+      margin: 30px 0;
+      position: relative;
+      height: 300px;
+      border: 2px dashed #ff69b4;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    #personagem {
+      position: absolute;
+      width: 50px;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
+      user-select: none;
+    }
+
+    .coracao-jogo {
+      position: absolute;
+      font-size: 24px;
+      color: #ff69b4;
+      user-select: none;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+
+    #placar {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #ffb6c1;
+    }
+
+    .btn, .replay-button {
+      background: linear-gradient(45deg, #ff69b4, #ff8fab);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      margin: 10px 5px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    }
+
+    .btn:hover, .replay-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nosso Amor desde 10/08/2024 ❤️</h1>
+    <div class="contador">
+      Estamos juntos há:<br>
+      <span id="dias">0</span> dias, 
+      <span id="horas">0</span> horas, 
+      <span id="minutos">0</span> minutos e 
+      <span id="segundos">0</span> segundos!
+    </div>
+    <img src="imagem.jpg" alt="Nosso momento" onclick="mostrarMensagem()">
+    <div id="mensagem" class="mensagem-final">Clique na foto para ver uma mensagem especial!</div>
+    <audio id="musica" autoplay controls>
+      <source src="musica.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
+    </audio>
+    <button class="replay-button" onclick="replayAudio()">Repetir Música</button>
+
+    <div class="jogo-container">
+      <div id="jogo">
+        <div id="personagem">❤️</div>
+      </div>
+      <div id="placar">Corações coletados: <span>0</span></div>
+    </div>
+    <button class="btn" onclick="iniciarJogo()">Começar o Jogo</button>
+    <button class="btn" onclick="reiniciarJogo()">Reiniciar</button>
+    <footer>Feito com todo meu amor para você 💖</footer>
+  </div>
+
+  <script>
+    function atualizarContador() {
+      const dataInicio = new Date('2024-08-10T00:00:00');
+      const agora = new Date();
+      const diferenca = agora - dataInicio;
+      const segundos = Math.floor(diferenca / 1000) % 60;
+      const minutos = Math.floor(diferenca / (1000 * 60)) % 60;
+      const horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      document.getElementById('dias').textContent = dias;
+      document.getElementById('horas').textContent = horas;
+      document.getElementById('minutos').textContent = minutos;
+      document.getElementById('segundos').textContent = segundos;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    const mensagens = [
+      "Você é a melhor coisa que já me aconteceu!",
+      "Meu coração é seu desde o primeiro dia 💘",
+      "Cada segundo ao seu lado é um presente",
+      "Te amo mais que ontem, menos que amanhã",
+      "Você é meu código favorito ❤️"
+    ];
+
+    function mostrarMensagem() {
+      const mensagem = mensagens[Math.floor(Math.random() * mensagens.length)];
+      document.getElementById('mensagem').textContent = mensagem;
+    }
+
+    function replayAudio() {
+      const audio = document.getElementById("musica");
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    let jogoAtivo = false;
+    let placar = 0;
+    const jogo = document.getElementById('jogo');
+    const personagem = document.getElementById('personagem');
+    const placarElement = document.querySelector('#placar span');
+
+    function iniciarJogo() {
+      if (jogoAtivo) return;
+      jogoAtivo = true;
+      placar = 0;
+      placarElement.textContent = '0';
+      jogo.innerHTML = '<div id="personagem">❤️</div>';
+      personagem.style.left = '50%';
+
+      jogo.addEventListener('mousemove', moverPersonagem);
+      jogo.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const rect = jogo.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        personagem.style.left = `${(x / rect.width) * 100}%`;
+      });
+
+      setInterval(criarCoracao, 1000);
+    }
+
+    function reiniciarJogo() {
+      jogoAtivo = false;
+      jogo.innerHTML = '<div id="personagem">❤️</div>';
+      iniciarJogo();
+    }
+
+    function moverPersonagem(e) {
+      const rect = jogo.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      personagem.style.left = `${(x / rect.width) * 100}%`;
+    }
+
+    function criarCoracao() {
+      if (!jogoAtivo) return;
+      const coracao = document.createElement('div');
+      coracao.className = 'coracao-jogo';
+      coracao.innerHTML = '❤️';
+      coracao.style.left = `${Math.random() * 90 + 5}%`;
+      coracao.style.top = '0';
+      jogo.appendChild(coracao);
+
+      const animacao = setInterval(() => {
+        const top = parseInt(coracao.style.top) || 0;
+        coracao.style.top = `${top + 2}px`;
+        if (verificarColisao(coracao, personagem)) {
+          clearInterval(animacao);
+          coracao.remove();
+          placar++;
+          placarElement.textContent = placar;
+          return;
+        }
+        if (top > 300) {
+          clearInterval(animacao);
+          coracao.remove();
+        }
+      }, 20);
+    }
+
+    function verificarColisao(c1, c2) {
+      const r1 = c1.getBoundingClientRect();
+      const r2 = c2.getBoundingClientRect();
+      return !(r1.bottom < r2.top || r1.top > r2.bottom || r1.right < r2.left || r1.left > r2.right);
+    }
+  </script>
+</body>
+</html>
